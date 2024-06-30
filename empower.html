@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>培力地圖引導式問卷</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff3e0;
+            color: #333;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #e64a19;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .scale {
+            display: flex;
+            justify-content: space-between;
+        }
+        .scale label {
+            flex: 1;
+            text-align: center;
+        }
+        .scale input {
+            flex: 1;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #e64a19;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>培力地圖引導式問卷</h1>
+    <form id="questionnaire">
+        <div class="question">
+            <label for="name">您的姓名是？</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="question">
+            <label for="age">您的年齡是？</label>
+            <input type="number" id="age" name="age" required>
+        </div>
+        <div class="question">
+            <label for="occupation">您目前的職業是？</label>
+            <input type="text" id="occupation" name="occupation" required>
+        </div>
+        <div class="question">
+            <label>您對目前工作的滿意度？</label>
+            <div class="scale">
+                <label for="satisfaction1">1</label>
+                <input type="radio" id="satisfaction1" name="satisfaction" value="1">
+                <label for="satisfaction2">2</label>
+                <input type="radio" id="satisfaction2" name="satisfaction" value="2">
+                <label for="satisfaction3">3</label>
+                <input type="radio" id="satisfaction3" name="satisfaction" value="3">
+                <label for="satisfaction4">4</label>
+                <input type="radio" id="satisfaction4" name="satisfaction" value="4">
+                <label for="satisfaction5">5</label>
+                <input type="radio" id="satisfaction5" name="satisfaction" value="5">
+            </div>
+        </div>
+        <div class="question">
+            <label>您是否有繼續進修的計畫？</label>
+            <select id="furtherStudy" name="furtherStudy" required onchange="toggleFurtherStudyReason()">
+                <option value="">請選擇</option>
+                <option value="yes">是</option>
+                <option value="no">否</option>
+            </select>
+        </div>
+        <div class="question" id="studyReason" style="display: none;">
+            <label for="reason">您沒有進修的原因是？</label>
+            <input type="text" id="reason" name="reason">
+        </div>
+        <div class="question" id="studyField" style="display: none;">
+            <label for="field">您計畫進修的領域是？</label>
+            <input type="text" id="field" name="field">
+        </div>
+        <button type="submit">提交</button>
+    </form>
+    <script>
+        function toggleFurtherStudyReason() {
+            var furtherStudy = document.getElementById('furtherStudy').value;
+            var studyReason = document.getElementById('studyReason');
+            var studyField = document.getElementById('studyField');
+            if (furtherStudy === 'no') {
+                studyReason.style.display = 'block';
+                studyField.style.display = 'none';
+            } else if (furtherStudy === 'yes') {
+                studyReason.style.display = 'none';
+                studyField.style.display = 'block';
+            } else {
+                studyReason.style.display = 'none';
+                studyField.style.display = 'none';
+            }
+        }
+
+        document.getElementById('questionnaire').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('問卷已提交！');
+        });
+    </script>
+</body>
+</html>
